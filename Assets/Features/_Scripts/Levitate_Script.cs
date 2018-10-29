@@ -10,6 +10,8 @@ public class Levitate_Script : MonoBehaviour {
 	public float timeToReachLevitateAmount;
 	private bool levitate = false;
 	private float levitateSpeed = 0.0f;
+	public GameObject fadePlane;
+	public float fadeTime;
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +34,10 @@ public class Levitate_Script : MonoBehaviour {
 			if(this.transform.localPosition.y < 10.0f){
 				levitateSpeed += Time.deltaTime/timeToReachLevitateAmount;
 				this.transform.Translate(0, levitateSpeed*(Time.deltaTime/levitateAmount), 0);
+			} else {
+				Color fadeColor = fadePlane.GetComponent<Renderer>().material.color;
+				fadeColor.a += Time.deltaTime/fadeTime;
+				fadePlane.GetComponent<Renderer>().material.color = fadeColor;
 			}
 		}
 
